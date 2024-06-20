@@ -1,0 +1,14 @@
+{
+  "name": "hooks-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "install-git-hooks": "git config core.hooksPath \".githooks\"",
+    "uninstall-git-hooks": "git config core.hooksPath \"\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
