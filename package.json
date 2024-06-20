@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "install-git-hooks": "git config core.hooksPath \".githooks\"",
-    "uninstall-git-hooks": "git config core.hooksPath \"\""
+    "install-git-hooks": "git config core.hooksPath \".githooks\" && git config merge.ff false",
+    "uninstall-git-hooks": "git config --unset core.hooksPath && git config --unset merge.ff"
   },
   "keywords": [],
   "author": "",
