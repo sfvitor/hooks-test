@@ -1,0 +1,22 @@
+#!/bin/sh
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REGEX="^(master|develop)$"
+
+if [[ $BRANCH =~ $REGEX ]]; then
+  echo "Merge na branch ${BRANCH} apenas permitido via pull request"
+  echo "Rodando \"git merge --abort\" (em background) para desfazer as mudanças do merge"
+  (sleep 1; git merge --abort) &
+  exit 1
+fi
+
+FORBIDDEN_BRANCH="staging"
+
+if [[ $GIT_REFLOG_ACTION == *merge* ]]; then
+  if [[ $GIT_REFLOG_ACTION == *$FORBIDDEN_BRANCH* ]]; then
+    echo "Proibido fazer merge da branch \"$FORBIDDEN_BRANCH\" para outras branches"
+    echo "Rodando \"git merge --abort\" (em background) para desfazer as mudanças do merge"
+    (sleep 1; git merge --abort) &
+    exit 1
+  fi
+fi
